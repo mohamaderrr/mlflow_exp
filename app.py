@@ -16,6 +16,7 @@ from sklearn.model_selection import train_test_split
 import mlflow
 import mlflow.sklearn
 from mlflow.models import infer_signature
+server_url="https://dagshub.com/mohamader14/mlflow_exp.mlflow"
 
 logging.basicConfig(level=logging.WARN)
 logger = logging.getLogger(__name__)
@@ -74,8 +75,9 @@ if __name__ == "__main__":
         mlflow.log_metric("r2", r2)
         mlflow.log_metric("mae", mae)
 
-        predictions = lr.predict(train_x)
-        signature = infer_signature(train_x, predictions)
+        #predictions = lr.predict(train_x)
+        #signature = infer_signature(train_x, predictions)
+        mlflow.set_tracking_uri(server_url)
 
         tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
 
